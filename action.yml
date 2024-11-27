@@ -11,6 +11,9 @@ inputs:
   user:
     description: "user name"
     required: true
+  password:
+    description: "user password"
+    required: true
   job-path:
     description: 'job/folder_name/job/job_name'
     required: true

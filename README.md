@@ -4,21 +4,11 @@ This action builds/triggers a jenkins job, waiting it to be finished and enablin
 
 ## Inputs
 
-### `jenkins-token`
-
-**Required**
- 
- ### `jenkins-url`
-
-**Required** 
-
-### `jenkins-user`
-
-**Required** 
-
-### `job-path`
-
-**Required** 
+### `jenkins-user` **Required**
+### `jenkins-password` **Required**
+### `jenkins-token` **Required**
+### `jenkins-url` **Required** 
+### `job-path` **Required** 
 
 E.g.
 ```
@@ -29,9 +19,7 @@ if job in jenkins root:
  "job/job_name"
 ```
 
-### `job-params`
-
-**Not mandatory**
+### `job-params` **Not mandatory**
 
 Set jenkins params as JSON string:  
 
@@ -39,7 +27,6 @@ E.g.
 ```
  "{'param1': 'value1', 'param2': 'value2'}"
 ``` 
-
 
 ## Outputs
 
@@ -53,11 +40,12 @@ E.g.
 ## Example usage
 ```
     - name: "Trigger jenkins job"
-      uses: GoldenspearLLC/build-jenkins-job@master
+      uses: neloman3/build-jenkins-job@master
       with:
         jenkins-url: ${{ secrets.JENKINS_URL }}
         jenkins-token: ${{ secrets.JENKINS_TOKEN }}
         user: "jenkins-username"
+        password: ${{ secrets.JENKINS_PASSWORD }}
         job-path: "job/folder_name/job/job_name"
         job-params: "{'param1': 'value1', 'param2': 'value2'}"
     - name: Get job status
