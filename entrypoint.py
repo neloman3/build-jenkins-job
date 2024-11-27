@@ -11,7 +11,7 @@ import json
 
 def mandatory_arg(argv):
     if argv == "":
-        raise ValueError("Only job_params can be empty. Required fields: url, token, user and path")
+        raise ValueError("Only job_params can be empty. Required fields: url, token, user, password and path")
     return argv
 
 
@@ -19,13 +19,14 @@ def mandatory_arg(argv):
 JENKINS_URL = mandatory_arg(sys.argv[1])
 JENKINS_TOKEN = mandatory_arg(sys.argv[2])
 JENKINS_USER = mandatory_arg(sys.argv[3])
-JOB_PATH = mandatory_arg(sys.argv[4])
+JENKINS_PASSWORD = mandatory_arg(sys.argv[4])
+JOB_PATH = mandatory_arg(sys.argv[5])
 
 # not mandatory
-JOB_PARAMS = sys.argv[5] or '{}'
+JOB_PARAMS = sys.argv[6] or '{}'
 
 # create/connect jenkins server
-server = jenkins.Jenkins(f"http://{JENKINS_URL}", username=JENKINS_USER, password=JENKINS_TOKEN)
+server = jenkins.Jenkins(f"http://{JENKINS_URL}", username=JENKINS_USER, password=JENKINS_PASSWORD)
 user = server.get_whoami()
 version = server.get_version()
 print(f"Hello {user['fullName']} from Jenkins {version}")
